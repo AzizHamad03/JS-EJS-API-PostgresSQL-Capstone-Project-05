@@ -1,0 +1,98 @@
+<%- include('partials/header.ejs') %>
+<div class="center">
+    <h1 class="searchTitle">Book Details</h1>
+</div>
+<div class="oneBookDisplay">
+    <img src="https://covers.openlibrary.org/b/id/<%= cover %>-L.jpg" alt="" />
+    <div>
+        <h2><%= title %></h2>
+        <h3>Author: <%= author %></h3>
+        <h3>Publish Year: <%= year %></h3>
+        <div class="flex_row">
+            <p class="fullstar">⭐️</p>
+            <p class="ratingtext"><%= avgrating %> / 5 (out of <%= numrating %> reviews)</p>
+        </div>
+        <% if (userReview) { %>
+            <a class="yourReviewButton" href="#<%=useremail%>">Your Review</a>
+        <% } else { %>
+            <form action="/rating" method="post">
+                <button class="addReview" value="<%= key %>" name="key">Add a review</button>
+            </form>
+        <% } %>
+    </div>
+</div>
+<div class="center">
+    <h2>Recent Reviews</h2>
+    <% if (reviews.length > 0) { %>
+        <select id="sortReviews" class="sort-dropdown">
+            <option value="newest">Sort by Date (Newest to Oldest)</option>
+            <option value="oldest">Sort by Date (Oldest to Newest)</option>
+            <option value="highestRating">Sort by Rating (Highest to Lowest)</option>
+            <option value="lowestRating">Sort by Rating (Lowest to Highest)</option>
+        </select>
+        <div class="reviewList">
+            <% reviews.forEach(function(review) { %>
+                <div class="reviewBlog" id="<%= review.userkey %>" data-creationdate="<%= review.creationdate %>" data-rating="<%= review.rating %>">
+                    <div class="starsRow">
+                        <% for (let i = 1; i <= 5; i++) { %>
+                            <% if (i <= review.rating) { %>
+                                <p class="fullstar">⭐️</p>
+                            <% } else { %>
+                                <p class="emptystar">⭐️</p>
+                            <% } %>
+                        <% } %>
+                    </div>
+                    <h3 class="reviewTitle"><%= review.reviewtitle %></h3>
+                    <p class="reviewName">by <%= review.name %> at <%= review.creationdate %></p>
+                    <hr class="hrBlog" />
+                    <p class="reviewBody"><%= review.body %></p>
+                    <% if (review.userkey == useremail || useremail == admin) { %>
+                        <div class="editdeleteFrom">
+                            <form action="/edit/<%= review.id%>" method="get">
+                                <button class="astextEdit"><i class="fas fa-edit"></i></button>
+                            </form>
+                            <form action="/delete/<%= review.id %>" method="post">
+                                <button class="astextDelete"><i class="fas fa-trash"></i></button>
+                                <input type="hidden" name="key" value="<%= key %>">
+                            </form>
+                        </div>
+                    <% } %>
+                </div>
+            <% }) %>
+        </div>
+    <% } else { %>
+        <div class="noReview">
+            <p>No Review has been added to this book yet</p>
+        </div>
+    <% } %>
+</div>
+<%- include('partials/footer.ejs') %>
+
+<script>
+    document.getElementById('sortReviews').addEventListener('change', function() {
+        const reviewList = document.querySelector('.reviewList');
+        const reviews = Array.from(reviewList.querySelectorAll('.reviewBlog'));
+        const sortBy = this.value;
+
+        reviews.sort((a, b) => {
+            switch (sortBy) {
+                case 'newest':
+                    return new Date(b.dataset.creationdate) - new Date(a.dataset.creationdate);
+                case 'oldest':
+                    return new Date(a.dataset.creationdate) - new Date(b.dataset.creationdate);
+                case 'highestRating':
+                    return b.dataset.rating - a.dataset.rating;
+                case 'lowestRating':
+                    return a.dataset.rating - b.dataset.rating;
+                default:
+                    return 0;
+            }
+        });
+
+        // Re-append sorted reviews
+        reviews.forEach(review => reviewList.appendChild(review));
+    });
+
+    // Trigger default sorting (newest)
+    document.getElementById('sortReviews').dispatchEvent(new Event('change'));
+</script>

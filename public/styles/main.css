@@ -1,0 +1,764 @@
+body{
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    height: 100vh;
+}
+@keyframes gradientMove {
+    0% {
+        background-position: 0% 0%;
+    }
+    50% {
+        background-position: 100% 100%;
+    }
+    100% {
+        background-position: 0% 0%;
+    }
+}
+
+header {
+    display: flex;
+    align-items: center;
+    background: linear-gradient(60deg, #3b3f42, #4a4e55, #686D76, #8C9DAB, #C4D0D9);
+    background-size: 200% 200%;
+    animation: gradientMove 5s ease infinite;
+    padding: 20px;
+    position: relative;
+    box-shadow: 0 10px 8px rgba(0, 0, 0, 0.2); /* Add a shadow for depth */
+}
+
+
+header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.1); /* Adjust as needed */
+    z-index: -1;
+}
+
+.logo{
+    height: 100px;
+    width: 100px;
+}
+.loginForm{
+    display: flex;
+   margin-left: auto;
+   margin-right: 10px;
+   padding: 5px;
+}
+.loginButton{
+    border-radius: 4px;
+    padding: 8px;
+    background-color: #EEEEEE;
+    width: 100px;
+    border: 0;
+    font-weight: bold;
+    cursor: pointer;
+}
+.signupButton{
+    border-radius: 4px;
+    padding: 8px;
+    background-color: #003D79 ;
+    width: 100px;
+    border: 0;
+    color: #EEEEEE;
+    font-weight: bold;
+    cursor: pointer;
+    margin-left: 6px;
+}
+.yourReviewsButton{
+    padding: 8px;
+    background-color: transparent;
+    border: 0;
+    color: #EEEEEE;
+    font-weight: bold;
+    cursor: pointer;
+}
+.yourReviewsButton:hover {
+    text-decoration: underline;
+}
+.midImage{
+    margin-bottom: 30px;
+    margin-top: 30px;
+    height: 150px;
+    width: 150px;
+    border-radius: 10px;
+    border: 3px solid #686D76;
+    background-image: url(https://via.placeholder.com/300x450/555555/ffffff?text=Unknown+Cover);
+    background-size: cover;
+    background-position: center;
+}
+.bookTitle{
+    font-family: "DM Serif Display", serif;
+    font-weight: 400;
+    font-style: italic;
+    font-size: 1.5rem;
+    margin-top: 0;
+}
+.pushTOLeft{
+    margin-left: auto;
+}
+.logoutButton{
+    border-radius: 4px;
+    padding: 8px;
+    background-color: red;
+    width: 100px;
+    border: 0;
+    color: #EEEEEE;
+    font-weight: bold;
+    cursor: pointer;
+}
+.loginFullForm{
+    background-color: rgb(255, 255, 255);
+    border-radius: 20px;
+    border: 4px solid #003D79 ;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    width: 30%;
+    height: 400px; 
+    font-family: "DM Serif Display", serif;
+    font-weight: 400;
+    font-style: italic;
+    font-size: 1.5rem;
+}
+.loginFullForm input {
+    border-radius: 10px;
+    border: 1px solid #90A0A3;
+    padding: 5px;
+    font-size: 1rem;
+    margin-bottom: 5px ;
+}
+.loginFullForm  button{
+    margin-top: 30px;
+    width: 25%;
+    border-radius: 10px;
+    background-color: #003D79 ;
+    border: 1px solid #90A0A3;
+    padding: 7px;
+    font-size: 1rem;
+    color: #EEEEEE;
+    cursor: pointer;
+}
+.errorMessage{
+    color: red;
+    font-size: 14pt;
+    margin: 0;
+}
+.loginToSignupText{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 11pt;
+}
+.loginToSignupText a {
+    display: inline;
+    color: #003D79 ; /* Change the color to match your design */
+    text-decoration: none;
+    margin-left: 3px;
+}
+.loginToSignupText a:hover {
+    text-decoration: underline;
+}
+
+#title{
+    font-family: Georgia, serif;
+    font-size: 4rem;
+    color: #EEEEEE;
+}
+.astext {
+    background: none;
+    border: none;
+    margin: 0;
+    padding: 0;
+    cursor: pointer;
+}
+.homeBody{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+    flex: 1;
+    background-color: #EEEEEE;
+}
+.homeBody h1{
+    font-family: "DM Serif Display", serif;
+    font-weight: 400;
+    font-style: italic;
+    font-size: 2rem;
+    color: #686D76;
+    margin-bottom: 4px;
+}
+.homeBody> p {
+    margin-bottom: 0;
+    font-family: "DM Serif Display", serif;
+    font-weight: 0;
+    font-size: 1.5rem;
+    color: #686D76
+}
+.searchBar{
+    border-radius: 25px;
+    border: 1.5px solid #003D79 ;
+    padding: 10px 20px;
+    width: 500px;
+    height: 50px ;
+    cursor: pointer;
+    font-size: 16px;
+    font-family: "Noto Serif", serif;
+    margin-top: 20px;
+}
+.searchBar:hover, .searchBar:focus {
+    border: 3px solid #003D79 ;
+    outline: #003D79;
+    filter: drop-shadow(0px 0px 8px #003D79 );
+}
+.searchTitle{
+    font-family: Georgia, serif;
+    font-size: 2.5rem;
+}
+.results{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    padding: 20px;
+}
+.booksviewForm {
+    display: inline-block; /* Allow the form to fit around the booksview */
+    margin: 20px;
+    padding: 0;
+    border: none; /* Remove any default border of the form */
+    cursor: pointer; /* Show a pointer cursor to indicate clickability */
+}
+.booksview{
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+    background-color: #686d7625;
+    width: 400px;
+    border-radius: 25px;
+    border: 5px solid #686D76;
+}
+.booksview img{
+    margin-bottom: 30px;
+    margin-top: 30px;
+    height: 150px;
+    width: 150px;
+    border-radius: 10px;
+    border: 3px solid #686D76;
+    background-image: url(https://via.placeholder.com/300x450/555555/ffffff?text=Unknown+Cover);
+    background-size: cover;
+    background-position: center;
+    
+}
+.bookDetails{
+    margin-top: 40px;
+    margin-left: 20px;
+}
+.bookDetails h3{
+    font-family: "DM Serif Display", serif;
+    font-weight: 400;
+    font-style: italic;
+    font-size: 1.5rem;
+    margin-top: 0;
+}
+.bookDetails > p{
+    font-family: "Noto Serif", serif;
+}
+.fullstasmall{
+    font-size: 13px;
+    font-family: FontAwesome;
+    content: "\f005";
+    color: #e36c10;
+    margin: 2px;
+}
+.ratingtextsmall{
+    font-size: 13px;
+    margin-top: 2px;
+    margin-left: 3px ;
+}
+.center{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.center >h2{
+    font-family: Georgia, serif;
+    font-size: 1.7rem;
+}
+.oneBookDisplay{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin: 50px;
+    
+}
+.oneBookDisplay img {
+    width: 50%;
+    height: 400px;
+    margin-left: 25%;
+    border-radius: 20px;
+    border: 3px solid #686D76;
+    background-image: url(https://via.placeholder.com/300x450/555555/ffffff?text=Unknown+Cover);
+    background-size: cover;
+    background-position: center;
+}
+.oneBookDisplay h2{
+    font-family: "DM Serif Display", serif;
+    font-weight: 400;
+    font-style: italic;
+    font-size: 3rem;
+    margin-top: 0;
+}
+.oneBookDisplay h3{
+    font-family: "Noto Serif", serif;
+    font-size: 1.7rem;
+    margin-top: 0;
+}
+.yourReviewButton{
+    font-family: "Noto Serif", serif;
+    margin: 0;
+    font-size: 16px;
+    color: #EEEEEE;
+    border-radius: 25px;
+    background-color: #686D76;
+    text-decoration: none;
+    padding: 8px;
+    cursor: pointer;
+}
+.addReview{
+    font-family: "Noto Serif", serif;
+    margin: 0;
+    font-size: 16px;
+    color: #EEEEEE;
+    border-radius: 25px;
+    background-color: #003D79 ;
+    padding: 8px;
+    cursor: pointer;
+}
+.ratingDiv{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background-color: #003B6F ;
+    margin: 30px;
+    width: 50%;
+    border-radius: 25px;
+    color: #EEEEEE;
+    font-family: "DM Serif Display", serif;
+    font-weight: 400;
+    font-style: italic;
+}
+.ratingForm{
+    width: 80%;
+
+}
+.ratingForm *{
+    width: 100%;
+    font-size: 16px;
+}
+.inputText{
+    background-color: #EEEEEE;
+    border-radius: 3px;
+    border: 2px solid #686D76;
+
+}
+#bodyId {
+    height: 300px;
+    margin-top: 5px;
+}
+
+.rating {
+    display: flex;
+    flex-direction: row-reverse; /* Keep this to ensure the stars are aligned right-to-left visually */
+    justify-content: flex-start;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 200px;
+}
+
+.rating > input {
+    display: none;
+    margin: 0;
+}
+
+.rating > label {
+    color: #90A0A3;
+    cursor: pointer;
+    font-size: 18px;
+    font-family: FontAwesome;
+    content: "\f005";
+    margin: 0;
+}
+
+.rating > label:before {
+    margin: 5px;
+    font-size: 18px;
+    font-family: FontAwesome;
+    content: "\f005";
+}
+
+.rating > input:checked ~ label,
+.rating:not(:checked) > label:hover,
+.rating:not(:checked) > label:hover ~ label {
+    color: #ffff00d6;
+}
+
+.rating > input:checked + label:hover,
+.rating > input:checked ~ label:hover,
+.rating > label:hover ~ input:checked ~ label,
+.rating > input:checked ~ label:hover ~ label {
+    color: #ffff00;
+}
+.error-message {
+    color: rgb(221, 24, 24);
+    display: none; /* Hide by default */
+    font-size: 0.875em;
+    margin-top: 5px;
+}
+fieldset{
+    border: 0;
+}
+.submitButton{
+    border-radius: 25px;
+    margin-bottom: 15px;
+    cursor: pointer;
+    border: 2px solid #686D76;
+    padding: 5px;
+}
+
+.reviewBlog{
+    background-color: #EEEEEE;
+    width: 50%;
+    color: black;
+    padding: 20px;
+    margin-bottom: 40px;
+    border-radius: 25px;
+    border: 3px solid #686d76b8;
+    outline: #686d76b8;
+    filter: drop-shadow(0px 0px 8px #686d76b8);
+    
+}
+.starsRow{
+    display: flex;
+    flex-direction: row;
+}
+.fullstar{
+    font-size: 20px;
+    font-family: FontAwesome;
+    content: "\f005";
+    color: #e36c10;
+    margin: 2px;
+
+}
+.emptystar{
+    font-size: 20px;
+    font-family: FontAwesome;
+    content: "\f005";
+    color: grey;
+    margin: 2px;
+}
+.flexrow{
+    display: flex;
+    flex-direction: row;
+}
+.flex_row{
+    display: flex;
+    flex-direction: row;
+}
+.ratingtext{
+    font-size: 20px;
+    margin-top: 2px;
+    margin-left: 3px ;
+}
+.reviewTitle{
+    font-family: "DM Serif Display", serif;
+    font-weight: 400;
+    font-style: italic;
+    font-size: 2rem;
+    margin-bottom: 0;
+    margin-top: 2px;
+}
+.reviewName {
+    margin-top: 0;
+    font-family: "DM Serif Display", serif;
+    color: #1a2130a7;
+    font-size: 1rem;
+}
+.hrBlog {
+    border: none;
+    background: linear-gradient(to right, #686d76b8, #EEEEEE, #686d76b8);
+    height: 3px;
+    margin: 10px 0;
+    margin-right: 10px;
+    border-radius: 25%;
+}
+.reviewBody{
+    font-family: "DM Serif Display", serif;
+    font-weight: 100; 
+    font-size: 1.2rem;
+    margin-bottom: 5px;
+    margin-top: 5px;
+}
+.editdeleteFrom{
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+}
+.astextEdit{
+    background: none;
+    border: none;
+    margin: 4px;
+    color: #ff6f00;
+    padding: 0;
+    cursor: pointer;
+    font-size: 16px;
+}
+.astextDelete{
+    background: none;
+    border: none;
+    margin: 4px;
+    margin-left: 8px;
+    padding: 0;
+    cursor: pointer;
+    color: red;
+    font-size: 16px;
+
+}
+.noReview{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 400px;
+}
+.noReview p {
+    font-family: "Noto Serif", serif;
+}
+
+.sort-dropdown{
+    border-radius: 25px;
+    padding: 8px;
+    border: 3px solid #686D76;
+    background-color: #EEEEEE;
+    margin-bottom: 20px;
+}
+.sort-dropdown:hover, .sort-dropdown:focus {
+    border: 3px solid #686D76;
+    outline: #686D76;
+    filter: drop-shadow(0px 0px 4px #686D76);
+}
+.reviewList{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+footer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #686D76;
+}
+footer p{
+    font-family: 'lato', sans-serif;
+    color: #EEEEEE;
+    font-size: 14pt; 
+    font-style: italic; 
+    margin-bottom: 2px;
+}
+@media (max-width: 450px) {
+    .logo{
+        height: 85px;
+        width: 85px;
+    }
+    .loginForm{
+        display: block;
+        margin-right: 5px;
+    }
+    .signupButton{
+        width: 70px;
+        font-size: 11px;
+        margin-left: 0px;
+        margin-top: 5px;
+    }
+    .loginButton{
+        font-size: 11px;
+        width: 70px;
+    }
+    .yourReviewsButton{
+        padding-left: 3px ;
+        font-size: 11px;
+
+    }
+    .logoutButton{
+        width: 70px;
+        font-size: 11px;
+        margin-left: 0px;
+        margin-top: 5px;
+        }
+    .homeBody{
+            align-items: center;
+            padding-left: 7px;
+            padding-right: 7px;
+        }
+    .homeBody h1{
+        margin-top: 70px;
+        font-size: 1.5rem;
+    }
+    .homeBody> p {
+        font-size: 1rem;
+    }
+    .searchBar{
+        margin-top: 50px;
+        width: 350px;
+        height: 35px ;
+        font-size: 13px;
+    }
+
+    footer{
+        align-items: start;
+        padding-left: 10px;
+    }
+    footer p{
+        font-size: 13px; 
+        margin-bottom: 4px;
+    }
+    
+    .loginFullForm{
+        padding: 5px;
+        padding-top: 0;
+        margin-top: 100px;
+        margin-left: 10px;
+        width: 90%;
+        height: auto; 
+        font-size: 1rem;
+    }
+    .loginFullForm input {
+        font-size: 0.8rem;
+    }
+    .errorMessage{
+        font-size: 11pt;
+    }
+    .loginToSignupText{
+        font-size: 11pt;
+    }
+    .searchTitle{
+        font-size: 1.5rem;
+    }
+    .results{
+        display: block;
+        padding: 20px;
+    }
+    .booksviewForm {
+        margin: 0;
+        width: 90%;
+        margin-bottom: 20px;
+    }
+    .booksview{
+        width: 100%;
+    }
+    .booksview img{
+        height: 120px;
+        width: 110px;
+        margin-top: 3px ;
+        margin-bottom: 3px;
+    }
+    .bookDetails{
+        margin-top: 3px;
+    }
+    .bookDetails h3{
+        font-size: 1rem;
+    }
+    .bookDetails > p{
+        font-size: 11px;
+    }
+
+    .oneBookDisplay{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin: 0;
+    }
+    .oneBookDisplay img {
+        height: 200px;
+        margin-left: 0;
+        margin-bottom: 10px;
+    }
+    .oneBookDisplay h2{
+        font-size: 1.5rem;
+    }
+    .oneBookDisplay h3{
+        font-size: 1rem;
+    }
+    .yourReviewButton{
+        font-size: 13px;
+    }
+    .addReview{
+        font-size: 13px;
+    }
+    .center >h2{
+        font-size: 1.5rem;
+    }
+    .reviewBlog{
+        width: 70%;
+        padding: 20px;
+        padding-right: 30px;
+        margin-bottom: 30px;
+        border-radius: 25px;
+        
+    }
+    .reviewTitle{
+        font-size: 1.5rem;
+    }
+    .reviewName {
+        font-size: 0.8rem;
+    }
+    .reviewBody{
+        font-size: 0.9rem;
+    }
+    .noReview{
+
+        height: 200px;
+    }
+    .noReview p {
+        font-size: 15px;
+
+    }
+
+
+    .ratingDiv{
+        margin-left: 10px;
+        margin-right: 10px ;
+        width: 90%;
+    }
+    .ratingForm{
+        width: 85%;
+    
+    }
+    .ratingForm *{
+        font-size: 14px;
+    }
+    #bodyId {
+        margin-bottom: 10px;
+        height: 200px;
+    }
+    
+    .error-message {
+        color: rgb(221, 24, 24);
+    }
+    .flexrow{
+       display: block;
+    }
+    .midImage{
+        margin-bottom: 15px;
+        margin-top: 15px;
+        height: 150px;
+        width: 150px;
+    }
+}

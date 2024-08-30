@@ -1,0 +1,73 @@
+<%- include('partials/header.ejs') %>
+    <div class="homeBody">
+        <div class="ratingDiv">
+            <h2>Create Your Review</h2>
+            <form action="/finishRating" method="post" class="ratingForm" onsubmit="return validateForm()">
+                <label for="bookName">Book Name</label>
+                <br>
+                <input class="inputText" disabled type="text" name="bookName" value="<%= title %>" placeholder="<%= title %>">
+                <label for="ReviewerName">Reviewer Name</label>
+                <br>
+                <input class="inputText" disabled type="text" name="ReviewerName" value="<%= username %>" placeholder="<%= username %>">
+                <label for="reviewTitle">Title</label>
+                <br>
+                <input class="inputText" type="text" name="reviewTitle" required placeholder="Title is required">
+                <label for="freeform">Your Thoughts on the Book</label>
+                <br>
+                <textarea name="body" rows="1" cols="50" wrap="physical" id="bodyId"
+                    placeholder="Your Thoughts...."></textarea>
+                    
+                <fieldset>
+                    <legend>Overall Rating</legend>
+                    <div class="rating">
+                        <input type="radio" id="star5" name="rating" value="5" />
+                        <label class="star" for="star5" title="Awesome" aria-hidden="true"></label>
+            
+                        <input type="radio" id="star4" name="rating" value="4" />
+                        <label class="star" for="star4" title="Great" aria-hidden="true"></label>
+            
+                        <input type="radio" id="star3" name="rating" value="3" />
+                        <label class="star" for="star3" title="Very good" aria-hidden="true"></label>
+            
+                        <input type="radio" id="star2" name="rating" value="2" />
+                        <label class="star" for="star2" title="Good" aria-hidden="true"></label>
+            
+                        <input type="radio" id="star1" name="rating" value="1" />
+                        <label class="star" for="star1" title="Bad" aria-hidden="true"></label>
+                    </div>
+                    <span class="error-message" id="ratingError">Please select a rating.</span>
+                </fieldset>
+                <input type="hidden" name="key" value="<%= key %>">
+                <button type="submit" class="submitButton">Submit Review</button>
+            </form>
+            
+        </div>
+
+
+
+    </div>
+    <%- include('partials/footer.ejs') %>
+
+    <script>
+        function validateForm() {
+            const ratingInputs = document.querySelectorAll('input[name="rating"]');
+            const ratingError = document.getElementById('ratingError');
+            let isRatingSelected = false;
+        
+            for (const input of ratingInputs) {
+                if (input.checked) {
+                    isRatingSelected = true;
+                    break;
+                }
+            }
+        
+            if (!isRatingSelected) {
+                ratingError.style.display = 'block'; // Show the custom error message
+                return false; // Prevent form submission
+            } else {
+                ratingError.style.display = 'none'; // Hide the custom error message
+            }
+        
+            return true; // Allow form submission
+        }
+        </script>

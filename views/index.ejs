@@ -1,0 +1,11 @@
+<%- include('partials/header.ejs') %>
+<div class="homeBody">
+    <h1>Welcome to Aziz's Book Notes! 📚✨</h1>
+    <p>Discover insightful reviews and detailed notes on your favorite books. </p>
+    <p>Dive in and enhance your reading journey with us!</p>
+    
+    <form action="/booksResult" method="post">
+        <input type="search" class="searchBar" name="book" placeholder="Search for books name...">
+    </form>
+</div>
+<%- include('partials/footer.ejs') %>

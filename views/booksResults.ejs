@@ -1,0 +1,38 @@
+<%- include('partials/header.ejs') %>
+<div class="homeBody">
+    <h2 class="searchTitle">Search Top Results</h2>
+    <div class="results">
+        <% for (let index = 0; index < titles.length; index++) { %>
+            <form action="/bookReview/<%= keys[index]%>" method="POST" class="booksviewForm">
+                <input type="hidden" name="book" value="<%= keys[index]%>">
+                <div class="booksview">
+                    <img src="https://covers.openlibrary.org/b/id/<%= covers_i[index] %>-L.jpg" alt="">
+                    <div class="bookDetails">
+                        <h3><%= titles[index] %></h3>
+                        <p>Author: <%= authors_name[index] %></p>
+                        <p>Publish Year: <%= first_publish_years[index] %></p>
+                        <div class="flex_row">
+                            <p class="fullstasmall">⭐️</p>
+                            <p class="ratingtextsmall"> <%=Math.round((ratings[index] + Number.EPSILON) * 100) / 100  %> / 5  (out of <%= ratingsNumbers[index] %> reviews)</p>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        <% } %>
+    </div>
+</div>
+<%- include('partials/footer.ejs') %>
+
+<script>
+    document.querySelectorAll('.booksview').forEach(item => {
+        item.addEventListener('click', (event) => {
+            // Check if the click event happened inside the .booksview element
+            if (event.target.closest('.booksview')) {
+                // Submit the closest form
+                const form = event.target.closest('form');
+                if (form) form.submit();
+            }
+        });
+    });
+</script>
+

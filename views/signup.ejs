@@ -1,0 +1,21 @@
+<%- include('partials/header.ejs') %>
+<div class="homeBody">
+    <form action="/signup?redirect=<%= redirect %>&key=<%= key %>" method="post" class="loginFullForm">
+        <h3 class="center">Sign Up</h3>
+        <label for="username">User Name</label>
+        <input type="text" name="username" required>
+        <label for="email">Email</label>
+        <input type="email" name="email" required>
+        <label for="password">Password</label>
+        <input type="password" name="password" required>
+        <% if (locals.errorMessage) { %>
+            <p class="errorMessage center"><%= errorMessage %></p>
+        <% } %>
+        <div class="center">
+            <button class="center" type="submit">Submit</button>
+        </div>
+        <p class="loginToSignupText">Already have an account? <a href="/login<%= redirect ? '?redirect=' + redirect + '&key=' + key : '' %>">Log in</a></p>
+
+    </form>
+</div>
+<%- include('partials/footer.ejs') %>

@@ -1,0 +1,86 @@
+<%- include('partials/header.ejs') %>
+
+<div class="homeBody">
+    <h2 class="searchTitle">Your Reviews</h2>
+    <% if (locals.noReview) { %>
+        <div class="noReview">
+            <p><%= noReview %></p>
+        </div>
+    <% } else { %>
+        <select id="sortReviews" class="sort-dropdown">
+            <option value="newest">Sort by Date (Newest to Oldest)</option>
+            <option value="oldest">Sort by Date (Oldest to Newest)</option>
+            <option value="highestRating">Sort by Rating (Highest to Lowest)</option>
+            <option value="lowestRating">Sort by Rating (Lowest to Highest)</option>
+            <option value="bookAZ">Sort by Book Name (A-Z)</option>
+        </select>
+
+        <% for (let index = 0; index < titles.length; index++) { %>
+            <div class="reviewBlog" data-creationdate="<%= creationdates[index] %>" data-rating="<%= ratings[index] %>" data-book="<%= books[index] %>">
+                <div class="flexrow">
+                    <div>
+                        <img class="midImage" src="https://covers.openlibrary.org/b/id/<%= covers[index] %>-L.jpg" alt="">
+                        <h3 class="bookTitle"><%= books[index] %></h3>
+                    </div>
+                    <div class="pushTOLeft">
+                        <div class="starsRow">
+                            <% for (let i = 1; i <= 5; i++) { %>
+                                <% if (i <= ratings[index]) { %>
+                                    <p class="fullstar">⭐️</p>
+                                <% } else { %>
+                                    <p class="emptystar">⭐️</p>
+                                <% } %>
+                            <% } %>
+                        </div>
+                        <h3 class="reviewTitle"><%= titles[index] %></h3>
+                        <p class="reviewName">at <%= creationdates[index] %></p>
+                    </div>
+                </div>
+                <hr class="hrBlog" />
+                <p class="reviewBody"><%= bodies[index] %></p>
+                <div class="editdeleteFrom">
+                    <form action="/edit/<%=reviewIds[index] %>" method="get">
+                        <input type="hidden" name="redirect" value="/yourReviews">
+                        <button class="astextEdit"> <i class="fas fa-edit"></i> </button>
+                    </form>
+                    <form action="/delete/<%=reviewIds[index] %>" method="post">
+                        <input type="hidden" name="redirect" value="/yourReviews">
+                        <button class="astextDelete"> <i class="fas fa-trash"></i> </button>
+                    </form>
+                </div>
+            </div>
+        <% } %>
+    <% } %>
+</div>
+
+<%- include('partials/footer.ejs') %>
+
+<script>
+    document.getElementById('sortReviews').addEventListener('change', function() {
+        const reviewsBlog = document.querySelector('.homeBody');
+        const reviews = Array.from(reviewsBlog.querySelectorAll('.reviewBlog'));
+        const sortBy = this.value;
+
+        reviews.sort((a, b) => {
+            switch (sortBy) {
+                case 'newest':
+                    return new Date(b.dataset.creationdate) - new Date(a.dataset.creationdate);
+                case 'oldest':
+                    return new Date(a.dataset.creationdate) - new Date(b.dataset.creationdate);
+                case 'highestRating':
+                    return b.dataset.rating - a.dataset.rating;
+                case 'lowestRating':
+                    return a.dataset.rating - b.dataset.rating;
+                case 'bookAZ':
+                    return a.dataset.book.localeCompare(b.dataset.book);
+                default:
+                    return 0;
+            }
+        });
+
+        reviews.forEach(review => reviewsBlog.appendChild(review));
+    });
+
+    // Trigger default sorting (newest)
+    document.getElementById('sortReviews').dispatchEvent(new Event('change'));
+</script>
